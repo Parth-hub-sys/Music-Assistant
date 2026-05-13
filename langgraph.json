@@ -1,0 +1,7 @@
+{
+    "dependencies": ["."],
+    "graphs": {
+        "MultiAgentMusicSystem": "./graph/workflow.py:graph"
+    },
+    "env": "./.env"
+}

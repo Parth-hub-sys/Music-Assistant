@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Store Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <span class="logo">🎵</span>
+        <div>
+          <h1>Music Store Assistant</h1>
+          <p class="session-label" id="sessionLabel">New Session</p>
+        </div>
+      </div>
+      <button class="btn-new-chat" onclick="newChat()">+ New Chat</button>
+    </header>
+
+    <!-- Chat area -->
+    <main class="chat-area" id="chatArea">
+
+      <!-- Welcome screen -->
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon">🎵</div>
+        <h2>Welcome to Music Store</h2>
+        <p>Ask me about albums, tracks, genres, or your purchase history.<br/>Start by telling me your Customer ID, Email, or Phone.</p>
+        <div class="quick-actions">
+          <button onclick="quickSend('Show me albums by AC/DC')">Albums by AC/DC</button>
+          <button onclick="quickSend('Give me Jazz songs')">Jazz Songs</button>
+          <button onclick="quickSend('Show my invoices')">My Invoices</button>
+          <button onclick="quickSend('Who is my support representative?')">Support Rep</button>
+          <button onclick="quickSend('What tracks does Metallica have?')">Metallica Tracks</button>
+          <button onclick="quickSend('Sort my purchases by unit price')">Purchases by Price</button>
+        </div>
+      </div>
+
+      <!-- Messages list -->
+      <div class="messages" id="messages"></div>
+
+    </main>
+
+    <!-- Input area -->
+    <footer class="input-area">
+      <div class="input-wrapper">
+        <textarea
+          id="userInput"
+          placeholder="Ask about music or your account..."
+          rows="1"
+          onkeydown="handleKeyDown(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <p class="input-hint">Enter to send &nbsp;·&nbsp; Shift+Enter for new line</p>
+    </footer>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
