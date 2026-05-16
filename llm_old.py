@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 groq_api_key = os.getenv("GROQ_API_KEY")
 
 llm = ChatGroq(
-    api_key="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",
+    api_key="",
     model="openai/gpt-oss-120b",
     temperature=0
 )
