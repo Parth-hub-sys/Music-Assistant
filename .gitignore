@@ -14,3 +14,5 @@ wheels/
 graphify-out
 .langgraph_api
 
+bd.ipynb
+llm_old.py
