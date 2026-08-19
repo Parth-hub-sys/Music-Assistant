@@ -4,7 +4,7 @@ from retrieval.db_engine import engine
 def get_customer_id_from_identifier(identifier: str) -> str:
     """Helper to find customer_id based on Email, Phone, or CustomerId string."""
     query = text("""
-        SELECT customer_id FROM customer 
+        SELECT customer_id FROM chinook.customer
         WHERE email = :id OR phone = :id OR CAST(customer_id AS TEXT) = :id
     """)
     with engine.connect() as connection:

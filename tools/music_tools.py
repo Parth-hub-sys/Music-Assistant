@@ -16,8 +16,8 @@ def get_albums_by_artist(artists: list[str]) -> str:
         for artist in artists:
             query = text("""
                 SELECT album.title, artist.name
-                FROM album
-                JOIN artist ON album.artist_id = artist.artist_id
+                FROM chinook.album
+                JOIN chinook.artist ON album.artist_id = artist.artist_id
                 WHERE artist.name ILIKE :artist
                 LIMIT 100
             """)
@@ -31,7 +31,7 @@ def get_albums_by_artist(artists: list[str]) -> str:
 @tool
 def get_tracks_by_artist(artist: str) -> str:
     """Retrieves all tracks for a given artist."""
-    query = text("SELECT track.name FROM track JOIN album ON track.album_id = album.album_id JOIN artist ON album.artist_id = artist.artist_id WHERE artist.name = :artist LIMIT 100")
+    query = text("SELECT track.name FROM chinook.track JOIN chinook.album ON track.album_id = album.album_id JOIN chinook.artist ON album.artist_id = artist.artist_id WHERE artist.name = :artist LIMIT 100")
     with engine.connect() as connection:
         result = connection.execute(query, {"artist": artist})
         return safe_tool_result([row[0] for row in result.fetchall()])
@@ -41,10 +41,10 @@ def get_songs_by_genre(genre: str) -> str:
     """Retrieves all songs for a given genre (case-insensitive, partial match)."""
     query = text("""
         SELECT track.name, artist.name AS artist
-        FROM track
-        JOIN genre ON track.genre_id = genre.genre_id
-        JOIN album ON track.album_id = album.album_id
-        JOIN artist ON album.artist_id = artist.artist_id
+        FROM chinook.track
+        JOIN chinook.genre ON track.genre_id = genre.genre_id
+        JOIN chinook.album ON track.album_id = album.album_id
+        JOIN chinook.artist ON album.artist_id = artist.artist_id
         WHERE genre.name ILIKE :genre
         LIMIT 100
     """)
@@ -58,7 +58,7 @@ def get_songs_by_genre(genre: str) -> str:
 @tool
 def check_for_songs(song_name: str) -> str:
     """Checks if a song exists in the catalog."""
-    query = text("SELECT name FROM track WHERE name = :song_name")
+    query = text("SELECT name FROM chinook.track WHERE name = :song_name")
     with engine.connect() as connection:
         result = connection.execute(query, {"song_name": song_name})
         found = result.fetchone() is not None
@@ -69,8 +69,8 @@ def get_genre_by_song(song_name: str) -> str:
     """Retrieves the genre of a specific song by its name (case-insensitive)."""
     query = text("""
         SELECT track.name, genre.name AS genre
-        FROM track
-        JOIN genre ON track.genre_id = genre.genre_id
+        FROM chinook.track
+        JOIN chinook.genre ON track.genre_id = genre.genre_id
         WHERE track.name ILIKE :song_name
         LIMIT 1
     """)

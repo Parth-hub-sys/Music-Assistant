@@ -11,10 +11,7 @@ def get_engine_for_chinook_db():
     if not database_url:
         raise ValueError("DATABASE_URL not set in .env")
     
-    return create_engine(
-        database_url,
-        connect_args={"options": "-csearch_path=chinook,public"},
-    )
+    return create_engine(database_url)
 
 # Get the SQLAlchemy engine and initialize SQLDatabase utility
 engine = get_engine_for_chinook_db()
