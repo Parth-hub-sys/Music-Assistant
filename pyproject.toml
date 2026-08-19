@@ -6,8 +6,12 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.136.1",
+    "langchain-community>=0.4.1",
+    "langchain-core>=1.2.17",
     "langchain-groq>=1.1.2",
+    "langgraph>=1.1.2",
     "psycopg2>=2.9.11",
     "python-dotenv>=1.2.2",
+    "sqlalchemy>=2.0.48",
     "uvicorn[standard]>=0.46.0",
 ]
